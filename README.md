@@ -1,64 +1,45 @@
 # Monitor Gempa Indonesia
 
-Dashboard interaktif untuk memvisualisasikan 15 kejadian gempa bumi berkekuatan M5.0 ke atas di Indonesia berdasarkan data resmi BMKG. Project ini dibuat sebagai tugas visualisasi data dengan tujuan menyajikan informasi gempa dalam bentuk grafik yang lebih mudah dipahami dibandingkan data mentah.
+> Dashboard visualisasi 15 kejadian gempa bumi M5.0+ paling terkini di Indonesia, datanya langsung dari feed resmi BMKG.
 
-🌐 **Live Demo:** https://dashboard-gempa-indonesia.vercel.app/
+🌐 Demo: https://nama-kelompok.vercel.app 
 
----
+## Isi Dashboard
 
-## 📊 Fitur Dashboard
-
-Dashboard terdiri dari empat visualisasi utama:
-
-- **Scatter/Bubble Map** untuk menampilkan persebaran lokasi gempa berdasarkan koordinat lintang dan bujur. Ukuran bubble merepresentasikan besar magnitudo gempa.
-- **Line Chart** untuk memperlihatkan perubahan magnitudo secara kronologis sehingga tren dan anomali lebih mudah diamati.
-- **Horizontal Bar Chart** untuk membandingkan jumlah kejadian gempa pada setiap wilayah pemantauan BMKG.
-- **Doughnut Chart** untuk menampilkan proporsi kategori kedalaman gempa, yaitu dangkal, menengah, dan dalam.
-
-Selain visualisasi utama, dashboard juga menyediakan:
-
-- Tooltip interaktif pada setiap chart.
-- Tabel data yang dapat diurutkan berdasarkan kolom.
-- Animasi grafik serta efek *count-up* pada indikator utama.
-
----
+- Chart 1: Scatter/Bubble Map — sebaran lokasi 15 titik gempa (lintang × bujur), ukuran bubble proporsional ke magnitudo
+- Chart 2: Line Chart — tren magnitudo secara kronologis dari 9–20 Juni 2026, dengan highlight merah pada anomali M6.7
+- Chart 3: Horizontal Bar Chart — jumlah kejadian per wilayah pemantauan BMKG
+- Chart 4: Doughnut Chart — proporsi kategori kedalaman gempa (dangkal / menengah / dalam)
+- Fitur interaktif: Tooltip Chart.js (hover di semua chart) + tabel data yang bisa diurutkan dengan klik header kolom
+- Animasi: Entrance animation Chart.js (default) + count-up number pada 4 KPI di hero section + fade-in CSS pada teks hero
 
 ## Sumber Data
 
-Dataset yang digunakan berasal dari **Data Gempabumi Terbuka BMKG (M5.0+)**.
+- Nama dataset: Data Gempabumi Terbuka BMKG — Gempabumi M 5.0+
+- URL sumber: https://data.bmkg.go.id/DataMKG/TEWS/gempaterkini.xml
+- Penyedia: Badan Meteorologi, Klimatologi, dan Geofisika (BMKG) Republik Indonesia
+- Jumlah baris: 15 kejadian gempa
+- Diakses pada: 21 Juni 2026
 
-- **Penyedia:** Badan Meteorologi, Klimatologi, dan Geofisika (BMKG)
-- **Sumber:** https://data.bmkg.go.id/DataMKG/TEWS/gempaterkini.xml
-- **Jumlah Data:** 15 kejadian gempa
-- **Tanggal Akses:** 21 Juni 2026
+## Cara Jalankan di Lokal
 
----
+```
+# Jalur A (static):
+Buka index.html langsung di browser (atau pakai Live Server di VS Code)
+```
 
-## Menjalankan Project
+Tidak perlu npm install — semua dependency (Chart.js) sudah di-bundle lokal di file `chart.umd.min.js`, tidak ada koneksi ke CDN eksternal yang dibutuhkan.
 
-Project ini merupakan website statis sehingga tidak memerlukan proses instalasi dependency maupun build.
+## Teknologi
 
-1. Clone repository.
-2. Buka folder project menggunakan Visual Studio Code.
-3. Jalankan dengan **Live Server**, atau buka file `index.html` langsung melalui browser.
+- Chart.js v4.4.4 (visualisasi, dibundle lokal)
+- HTML + CSS + JavaScript (vanilla, tanpa framework)
+- Vercel (deployment)
 
----
+## Anggota
 
-## Teknologi yang Digunakan
+- 103012300455 – Ziyad Fathir Al Biaroza
+- 103012300399 – Muhammad Ridwan Arrayyan
+- 103012300107 – Zweta Lathifah Kus Aliyyah
+- 103012300140 – Farazahwa J Michelle
 
-- HTML5
-- CSS3
-- JavaScript (Vanilla)
-- Chart.js v4.4.4
-- Vercel
-
----
-
-## Anggota Kelompok
-
-| NIM | Nama |
-|:---|:-----|
-| 103012300455 | Ziyad Fathir Al Biaroza |
-| 103012300399 | Muhammad Ridwan Arrayyan |
-| 103012300107 | Zweta Lathifah Kus Aliyyah |
-| 103012300140 | Farazahwa J Michelle |
