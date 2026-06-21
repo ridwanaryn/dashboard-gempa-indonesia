@@ -1,11 +1,12 @@
 /**
+ * CATT:
  * app.js — Logic untuk Dashboard Monitor Gempa Indonesia
  * Menggunakan Chart.js (CDN) untuk semua visualisasi.
  * Tooltip & animasi entrance memakai default behavior Chart.js.
  */
 
 // -------------------------------------------------------
-// 0. Palet warna konsisten (selaras dengan style.css)
+// 0. Palet warna 
 // -------------------------------------------------------
 const COLORS = {
   accent: "#0071E3",
@@ -23,7 +24,7 @@ Chart.defaults.color = COLORS.inkSoft;
 Chart.defaults.font.size = 12;
 
 // -------------------------------------------------------
-// 1. KPI HERO — hitung dari data & jalankan count-up
+// 1. KPI HERO — perhitungan dari data 
 // -------------------------------------------------------
 function computeKpis(data) {
   const magnitudes = data.map(d => d.magnitude);
@@ -302,7 +303,7 @@ function renderDepthChart() {
 }
 
 // -------------------------------------------------------
-// 6. TABEL — render + sorting interaktif (klik header)
+// 6. TABEL — render + sorting interaktif 
 // -------------------------------------------------------
 let currentSort = { key: "tanggal", dir: "desc" };
 

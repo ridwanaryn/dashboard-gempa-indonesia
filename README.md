@@ -1,8 +1,8 @@
 # Monitor Gempa Indonesia
 
-> Dashboard visualisasi 15 kejadian gempa bumi M5.0+ paling terkini di Indonesia, datanya langsung dari feed resmi BMKG.
+> Dashboard visualisasi 15 kejadian gempa bumi M5.0+ paling terkini di Indonesia, data berasal dari website BMKG.(https://data.bmkg.go.id/gempabumi/)
 
-🌐 Demo: https://nama-kelompok.vercel.app 
+🌐 Demo: https://dashboard-gempa-indonesia.vercel.app/
 
 ## Isi Dashboard
 

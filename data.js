@@ -1,11 +1,8 @@
 /**
+ * CATT:
  * Data Gempa Bumi Indonesia — M 5.0+
  * Sumber resmi: BMKG (Badan Meteorologi, Klimatologi, dan Geofisika)
  * Endpoint: https://data.bmkg.go.id/DataMKG/TEWS/gempaterkini.xml
- * Diambil: 21 Juni 2026
- * Catatan: BMKG menyediakan 15 kejadian gempa M 5.0+ paling terkini di seluruh
- * wilayah Indonesia. Data di bawah ini disalin apa adanya dari feed resmi
- * tersebut (tidak ada angka yang direkayasa).
  */
 
 const earthquakeData = [
