@@ -39,3 +39,5 @@ Tidak perlu npm install — semua dependency (Chart.js) sudah di-bundle lokal di
 ## Anggota
 
 - Ziyad (NIM) ← lengkapi dengan NIM dan anggota lain jika berkelompok
+
+
