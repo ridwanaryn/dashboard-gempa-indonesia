@@ -71,68 +71,57 @@ function renderHeroKpis() {
 }
 
 // -------------------------------------------------------
-// 2. SCATTER CHART — sebaran lokasi (lon = X, lat = Y)
+// 2. SCATTER MAP — sebaran lokasi menggunakan Leaflet.js
 // -------------------------------------------------------
-function renderScatterChart() {
-  const ctx = document.getElementById("scatterChart");
+function renderMap() {
+  // Inisialisasi peta Leaflet.js
+  const map = L.map("map", {
+    center: [-2.5, 118], // Titik tengah geografis Indonesia
+    zoom: 5,
+    minZoom: 4,
+    maxZoom: 10,
+    scrollWheelZoom: false // Mencegah zoom tidak sengaja saat men-scroll halaman
+  });
 
-  const points = earthquakeData.map(d => ({
-    x: d.lon,
-    y: d.lat,
-    r: 6 + (d.magnitude - 5.0) * 9, // radius proporsional ke magnitudo
-    raw: d
-  }));
+  // Tambahkan tile layer minimalis (CartoDB Positron)
+  L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+    subdomains: "abcd",
+    maxZoom: 20
+  }).addTo(map);
 
-  new Chart(ctx, {
-    type: "bubble",
-    data: {
-      datasets: [{
-        label: "Titik Gempa",
-        data: points,
-        backgroundColor: points.map(p => p.raw.magnitude >= 6 ? COLORS.alertSoft : COLORS.accentSoft),
-        borderColor: points.map(p => p.raw.magnitude >= 6 ? COLORS.alert : COLORS.accent),
-        borderWidth: 1.5,
-        hoverBorderWidth: 2.5
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      animation: { duration: 900, easing: "easeOutQuart" },
-      scales: {
-        x: {
-          title: { display: true, text: "Bujur (BT)", color: COLORS.inkSoft, font: { size: 12, weight: 600 } },
-          grid: { color: COLORS.line },
-          min: 94, max: 142
-        },
-        y: {
-          title: { display: true, text: "Lintang", color: COLORS.inkSoft, font: { size: 12, weight: 600 } },
-          grid: { color: COLORS.line },
-          min: -12, max: 8
-        }
-      },
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          backgroundColor: COLORS.ink,
-          padding: 12,
-          cornerRadius: 10,
-          titleFont: { size: 13, weight: 700 },
-          bodyFont: { size: 12.5 },
-          callbacks: {
-            title: (items) => items[0].raw.raw.wilayah,
-            label: (item) => {
-              const d = item.raw.raw;
-              return [
-                `Magnitudo: M${d.magnitude.toFixed(1)}`,
-                `Kedalaman: ${d.kedalaman} km`,
-                `Waktu: ${d.tanggal}, ${d.jam}`
-              ];
-            }
-          }
-        }
-      }
-    }
+  // Plot data gempa bumi sebagai circle markers (bubble plot)
+  earthquakeData.forEach(d => {
+    const isHigh = d.magnitude >= 6.0;
+    const radius = 6 + (d.magnitude - 5.0) * 8; // Radius proporsional ke magnitudo (dalam piksel)
+
+    const marker = L.circleMarker([d.lat, d.lon], {
+      radius: radius,
+      color: isHigh ? COLORS.alert : COLORS.accent,
+      fillColor: isHigh ? COLORS.alert : COLORS.accent,
+      fillOpacity: 0.25,
+      weight: 1.5
+    }).addTo(map);
+
+    // Siapkan tooltip HTML yang meniru desain tooltip Chart.js
+    const tooltipContent = `
+      <div style="font-weight: 700; margin-bottom: 4px; font-size: 13.5px; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 4px;">
+        ${d.wilayah}
+      </div>
+      <div style="color: rgba(255,255,255,0.9); font-size: 12px; line-height: 1.5; margin-top: 4px;">
+        <div>Magnitudo: <strong style="color: ${isHigh ? '#FF3B30' : '#7FB8F2'};">M ${d.magnitude.toFixed(1)}</strong></div>
+        <div>Kedalaman: <strong>${d.kedalaman} km</strong></div>
+        <div style="font-size: 11px; color: rgba(255,255,255,0.7); margin-top: 2px;">
+          ${d.tanggal}, ${d.jam}
+        </div>
+      </div>
+    `;
+
+    marker.bindTooltip(tooltipContent, {
+      direction: "top",
+      sticky: true, // Tooltip mengikuti kursor
+      offset: [0, -5]
+    });
   });
 }
 
@@ -370,7 +359,7 @@ function initTable() {
 // -------------------------------------------------------
 document.addEventListener("DOMContentLoaded", () => {
   renderHeroKpis();
-  renderScatterChart();
+  renderMap();
   renderTrendChart();
   renderRegionChart();
   renderDepthChart();
